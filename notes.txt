@@ -1,0 +1,10 @@
+differences between Type & Interface
+->both used for define types
+->reuse
+->have there key words
+Type                       |    Interface
+.used for general purpose  |  .used for only objects
+(for variables,functions)  |
+.can store union type      |  .cant store union types,so not used for functions
+                           |  .can be used in Classes ,using "implements" keyword.
+                           |  .can be redefine and add more properties. 
