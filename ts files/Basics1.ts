@@ -1,3 +1,12 @@
+.type interface
+.type explicit
+.basic primitive
+.union
+.object 
+.literal types
+.functions
+
+
 //type inference
 /* inference means understood,having idea,clue */
 /* here ts decides types,cleaner code,less repetition */

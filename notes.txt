@@ -8,3 +8,19 @@ Type                       |    Interface
 .can store union type      |  .cant store union types,so not used for functions
                            |  .can be used in Classes ,using "implements" keyword.
                            |  .can be redefine and add more properties. 
+
+
+
+difference between void  & never
+
+void-The function finishes, but returns nothing (undefined).
+never-The function never reaches the end.
+.In the context of a function return type, never tells TypeScript: "This function will never finish its execution normally."
+main roles of never:
+1. Functions that throw errors
+As in your code, the function starts, but it reaches a throw statement before it can reach the end or return a value. The execution path is "broken."
+2. Infinite Loops
+If a function contains a while(true) loop that has no break or return, it also returns never because it stays "trapped" in the function forever.
+3. Exhaustiveness Checking (Exhaustive Pattern Matching)
+This is the most "Intermediate" use case. It ensures you have handled every possible case in a switch or if/else block. If you handle every case of a Union type, 
+the remaining possibility should be never.

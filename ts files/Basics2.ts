@@ -7,6 +7,8 @@
 .Default Parametes
 
 
+import { logMsg } from './someModule';
+
 
 //Type Aliases(Custom Types)
 /*.aliases make code clean
@@ -148,10 +150,41 @@ const sumAll=(a:number=10,b:number,c:number=2):number=>{
 
 logMsg(addAll(2,3,2))
 logMsg(addAll(2,3))
-logMsg(summAll(undefined,3))
+logMsg(sumAll(undefined,3))
 
 //Rest Parameters
+const total = (a:number,...nums:number[]):number=>{
+  return a+nums.reduce((prev,curr)=>prev+curr)
+}
+logMsg(total(10,2,3,4))
 
 
+//never type 
+/* two use cases for never types : 1. errors in functions
+                                  2. for infinite loops
+ */
+//1
+const createError =(errMsg:string):never=>{
+  throw new Error(errMsg)
+}
 
+//2
+const infinite=()=>{
+  let i:number=1
+  while (true){
+    i++
+    if (i>100) break
+  }
+}
 
+//3
+//custom type guard
+const isNumber=(value:any):boolean=>{
+  return typeof value === 'number'? true :false
+}
+//use of the never type
+const numberOrString=(value:number | string):string=>{
+  if (typeof value === 'string') return 'string'
+  if (isNumber(value)) return 'number'
+  return createError('This should never happen!')
+}
