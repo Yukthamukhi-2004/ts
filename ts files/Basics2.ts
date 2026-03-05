@@ -1,6 +1,10 @@
 .TypeAliases
 .Interface
+.Narrowing with Optional Properties
 .Merging Types
+.Enum
+.Optional parameter
+.Default Parametes
 
 
 
@@ -29,6 +33,16 @@ type StringOrNum = string | number;
 
 let userID: StringOrNum = "abc1";
 userID = 123;
+
+//ex3
+type stringOrNumber= (string | number )[]
+type Guitarist={
+  name?:string,
+  active:boolean,
+  albums:stringOrNumber,
+}
+
+
 
 //Interface
 
@@ -115,5 +129,29 @@ enum Grade{
   B,
 }
 console.log(Grade.U)
+
+//Optional Parameters
+
+const addAll=(p:number,q:number,r?:number):number=>{
+     if(typeof r !== 'undefined'){
+        return p+q+r
+     }
+     return p+q
+}
+
+//default param value
+
+const sumAll=(a:number=10,b:number,c:number=2):number=>{
+  return a+b+c
+
+}
+
+logMsg(addAll(2,3,2))
+logMsg(addAll(2,3))
+logMsg(summAll(undefined,3))
+
+//Rest Parameters
+
+
 
 

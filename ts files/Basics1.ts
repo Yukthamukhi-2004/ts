@@ -57,30 +57,43 @@ user = {
   id: "abc",
 };
 
-//Array Type
-let hobbies: Array<string>; //Generic Type or
-//let hobbies: string[];
-hobbies = ["Sports", "Cooking", "Reading"];
+//Literal Types
+//ex1
 
-//Adding types to functions
+let userName1 = "Dave" | "John" | "Amy"; //any of values valid for username
+userName1 = "Rechal"; //error
 
-function add(a: number, b: number): void {
-  const result = a + b;
-  console.log(result);
-} //as this function return nothing ,then use void
+let hobbies = ["Sports", "Cooking", "Reading"];
 
+// functions
+//ex1
+function add(a: number, b: number): number {
+  return a + b;
+}
+const logMsg = (message: any): void => {
+  console.log(message);
+};
+logMsg("Hello!");
+logMsg(add(2, 3));
+//as this function return nothing ,then use void
+
+//ex2
 function add1(a: number, b: number): number {
   const result = a + b;
   return result;
 }
 
-//defining Funtion Types
+//ex3
 
-function calculate(
-  a: number,
-  b: number,
-  calcFn: (a: number, b: number) => number,
-) {
-  calcFn(a, b);
+/* difference in functions when used type & interface */
+
+//type mathFunction=(a:number,b:number)=>number
+interface mathFunction {
+  (a: number, b: number): number;
 }
-calculate(2, 5, add1);
+
+let multiply: mathFunction = function (c, d) {
+  return c * d;
+};
+
+logMsg(multiply(2, 2));
