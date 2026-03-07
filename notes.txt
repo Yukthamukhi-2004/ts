@@ -24,3 +24,71 @@ If a function contains a while(true) loop that has no break or return, it also r
 3. Exhaustiveness Checking (Exhaustive Pattern Matching)
 This is the most "Intermediate" use case. It ensures you have handled every possible case in a switch or if/else block. If you handle every case of a Union type, 
 the remaining possibility should be never.
+
+
+Property Initialization Methods :
+
+1.Direct initialisation:
+Ex:-
+class Car {
+  brand: string = "Toyota"; // Initialized directly
+  color: string;
+  // ...
+}
+use cases:
+.for Fixed constants or "safe" starting values that don't depend on external input.
+
+2.constructor initialization:
+ex code:-
+class Car {
+  brand: string;
+  color: string;
+  constructor(color: string) {
+    this.brand = "Toyota";
+    this.color = color; // Initialized in the constructor
+  }
+}
+
+use cases:
+.Required data that varies for every instance.ex:An Employee class where you 
+must provide a unique id and name at the moment the object is created.
+
+3.Optional Properties:
+ex code:-
+class Car {
+  brand?: string; // Optional, can be undefined initially
+  // ...
+}
+
+use case:
+. Data that is truly "extra" or might not be available yet.
+ex: A Profile class where a middleName or phoneNumber is not required for everyone.
+
+4.Parameter Properties (Shorthand)
+ex code:
+class Car {
+  // TypeScript automatically creates and initializes the 'color' property
+  constructor(public color: string) {}
+}
+
+usecase:
+.Reducing "boilerplate" code when you have many properties.
+ex:A Point class with x, y, and z coordinates. Instead of declaring them at the
+ top and assigning them inside the constructor, you do both in one line.
+
+5.Definite Assignment Assertion:
+ex code:
+class Car {
+  brand!: string; // Asserts it will be assigned later
+  // ...
+}
+use case:
+.Using ! tells the compiler that the property will be assigned a value
+ later (e.g., via an external library or a method), even if it's not in the constructor
+
+
+when a Constructor is Needed?
+1.Strict Property Initialization: If the strictPropertyInitialization flag is enabled in your tsconfig.json, TypeScript will throw an error if a property is neither initialized at declaration nor in the constructor.
+2.External Input: If you need to set property values based on arguments passed when using new ClassName(arg), you must use a constructor.
+3.Readonly Properties: readonly fields must be initialized either at their declaration or inside the constructor.
+4.Inheritance: If a class extends a base class and has its own constructor, it must call super() to initialize the parent.
