@@ -92,3 +92,53 @@ when a Constructor is Needed?
 2.External Input: If you need to set property values based on arguments passed when using new ClassName(arg), you must use a constructor.
 3.Readonly Properties: readonly fields must be initialized either at their declaration or inside the constructor.
 4.Inheritance: If a class extends a base class and has its own constructor, it must call super() to initialize the parent.
+
+
+Type Narrowing:
+
+You can say a code block is performing type narrowing if:
+Before: The variable could be multiple things (a Union type).
+The Trigger: You use a conditional check (like if or switch).
+After: Inside that block, TypeScript "knows" exactly what the type is and lets you use methods specific to that type.
+
+4 Common Ways to Narrow a Type:
+    1.The "typeof" Guard (Primitive Narrowing):
+    ex code:
+    function format(input: string | number) {
+      // At this point, 'input' is string | number
+      if (typeof input === "string") {
+        // NARROWING HAPPENED HERE
+        return input.toUpperCase(); // Safe! TypeScript knows it's a string.
+      }
+      return input.toFixed(2); // Also narrowed! If it's not a string, it must be a number.
+    }
+
+    2.The Truthiness Check:
+    function printName(name?: string) {
+  if (name) { 
+    // NARROWING: 'name' is now 'string', not 'string | undefined'
+    console.log(name.length);
+  }
+}    
+     
+      3.Equality Narrowing
+      Using === or !== to compare values.
+      ex code:
+      function check(x: string | number, y: string | boolean) {
+  if (x === y) {
+    // NARROWING: For x to equal y, they both MUST be 'string'.
+    // x is now 'string' inside this block.
+  }
+}
+
+     4.The in Operator (Object Narrowing)
+     ex code:
+     type Fish = { swim: () => void };
+type Bird = { fly: () => void };
+
+function move(animal: Fish | Bird) {
+  if ("swim" in animal) {
+    // NARROWING: TypeScript knows 'animal' is a Fish.
+    animal.swim();
+  }
+}
