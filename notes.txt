@@ -94,7 +94,7 @@ when a Constructor is Needed?
 4.Inheritance: If a class extends a base class and has its own constructor, it must call super() to initialize the parent.
 
 
-Type Narrowing:
+//Type Narrowing:
 
 You can say a code block is performing type narrowing if:
 Before: The variable could be multiple things (a Union type).
@@ -142,3 +142,32 @@ function move(animal: Fish | Bird) {
     animal.swim();
   }
 }
+
+//Getters and Setters
+
+why we use them?
+.Consistency
+.Side Effects:to trigger actions like logging or updating a ui,every time a specific value changes.
+
+when we use them:
+1.for Data Validation
+2.for Computed Properties
+3.for Encapsulation(Read-only access)
+4. Debugging and Logging
+If you have a bug where a value is changing unexpectedly, you can put a console.log inside a setter. 
+Every time that property is modified anywhere in your app, it will trigger the log, telling you exactly when the change happened.
+
+Important Syntax Tip
+In TypeScript, you usually prefix the actual private variable with an underscore (e.g., _name) 
+to avoid a naming collision with the getter/setter names.
+
+class Account {
+  private _balance: number = 0;
+
+  get balance() { return this._balance; } // Read-only public access
+}
+
+Combination      |             Result
+Get + Set        |      Standard read/write property with added logic.
+Get only         |      Read-only property (very common for IDs or totals).
+Set only         |      Write-only property (rare, but used for things like "password" updates).
