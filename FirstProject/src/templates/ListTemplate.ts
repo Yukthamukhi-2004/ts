@@ -9,6 +9,8 @@ interface DOMList {
 export default class ListTemplate implements DOMList {
   ul: HTMLUListElement;
 
+  static instance: ListTemplate = new ListTemplate();
+
   private constructor() {
     this.ul = document.getElementById("listItems") as HTMLUListElement;
   }
@@ -45,6 +47,13 @@ export default class ListTemplate implements DOMList {
       button.className = "button";
       button.textContent = "X";
       li.append(button);
+
+      button.addEventListener("click", () => {
+        fullList.removeItem(item.id);
+        this.render(fullList);
+      });
+
+      this.ul.append(li);
     });
   }
 }
